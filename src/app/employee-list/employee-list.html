@@ -1,0 +1,139 @@
+<div class="card shadow p-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h3>Employee List</h3>
+
+    <div class="d-flex gap-2">
+
+      <input type="text"
+             class="form-control"
+             placeholder="Search by name"
+             [(ngModel)]="searchText">
+
+      <button class="btn btn-primary"
+              (click)="getEmployees()">
+        Load Employees
+      </button>
+
+    </div>
+
+  </div>
+
+  <table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Course</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let emp of employees
+        .filter(emp =>
+          emp.name?.toLowerCase()
+          .includes(searchText.toLowerCase())
+        )">
+
+        <td>{{emp.id}}</td>
+        <td>{{emp.name}}</td>
+        <td>{{emp.email}}</td>
+        <td>{{emp.phone}}</td>
+        <td>{{emp.department}}</td>
+        <td>{{emp.salary}}</td>
+        <td>{{emp.courseName}}</td>
+
+        <td>
+          <button class="btn btn-warning btn-sm me-2"
+                  (click)="editEmployee(emp)">
+            Edit
+          </button>
+
+          <button class="btn btn-danger btn-sm"
+                  (click)="deleteEmployee(emp.id)">
+            Delete
+          </button>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+<!-- Update Employee Form -->
+<div class="card shadow p-4 mt-4"
+     *ngIf="showUpdateForm">
+
+  <h3 class="mb-3">Update Employee</h3>
+
+  <form (ngSubmit)="updateEmployee()">
+
+    <div class="row">
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Name</label>
+        <input type="text"
+               class="form-control"
+               [(ngModel)]="selectedEmployee.name"
+               name="editName">
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Email</label>
+        <input type="email"
+               class="form-control"
+               [(ngModel)]="selectedEmployee.email"
+               name="editEmail">
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Phone</label>
+        <input type="text"
+               class="form-control"
+               [(ngModel)]="selectedEmployee.phone"
+               name="editPhone">
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Department</label>
+        <input type="text"
+               class="form-control"
+               [(ngModel)]="selectedEmployee.department"
+               name="editDepartment">
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Salary</label>
+        <input type="text"
+               class="form-control"
+               [(ngModel)]="selectedEmployee.salary"
+               name="editSalary">
+      </div>
+
+    </div>
+
+    <button type="submit"
+            class="btn btn-success me-2">
+      Update
+    </button>
+
+    <button type="button"
+            class="btn btn-secondary"
+            (click)="cancelUpdate()">
+      Cancel
+    </button>
+
+  </form>
+
+</div>

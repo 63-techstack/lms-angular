@@ -1,18 +1,23 @@
-<div class="card shadow p-4">
+<div class="card employee-card shadow p-4">
 
-  <div class="d-flex justify-content-between align-items-center mb-3">
+  <div class="employee-header">
 
-    <h3>Employee List</h3>
+    <div class="employee-title">
+      <h3>Employee List</h3>
+      <p>Manage employee details and assigned courses</p>
+    </div>
 
-    <div class="d-flex gap-2">
+    <div class="employee-actions">
 
-      <input type="text"
-             class="form-control"
-             placeholder="Search by name"
-             [(ngModel)]="searchText">
+      <input
+        type="text"
+        class="form-control search-box"
+        placeholder="Search by name"
+        [(ngModel)]="searchText">
 
-      <button class="btn btn-primary"
-              (click)="getEmployees()">
+      <button
+        class="btn btn-primary"
+        (click)="getEmployees()">
         Load Employees
       </button>
 
@@ -20,120 +25,242 @@
 
   </div>
 
-  <table class="table table-bordered table-hover">
+  <div class="table-wrapper">
 
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Department</th>
-        <th>Salary</th>
-        <th>Course</th>
-        <th>Action</th>
-      </tr>
-    </thead>
+    <table class="employee-table">
 
-    <tbody>
+      <thead>
 
-      <tr *ngFor="let emp of employees
-        .filter(emp =>
-          emp.name?.toLowerCase()
-          .includes(searchText.toLowerCase())
-        )">
+        <tr>
 
-        <td>{{emp.id}}</td>
-        <td>{{emp.name}}</td>
-        <td>{{emp.email}}</td>
-        <td>{{emp.phone}}</td>
-        <td>{{emp.department}}</td>
-        <td>{{emp.salary}}</td>
-        <td>{{emp.courseName}}</td>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Department</th>
+          <th>Salary</th>
+          <th>Course</th>
 
-        <td>
-          <button class="btn btn-warning btn-sm me-2"
-                  (click)="editEmployee(emp)">
-            Edit
-          </button>
+          @if (isAdmin()) {
 
-          <button class="btn btn-danger btn-sm"
-                  (click)="deleteEmployee(emp.id)">
-            Delete
-          </button>
-        </td>
+            <th>Action</th>
 
-      </tr>
+          }
 
-    </tbody>
+        </tr>
 
-  </table>
+      </thead>
+
+      <tbody>
+
+        @for (
+          emp of employees
+          .filter(emp =>
+            emp.name?.toLowerCase()
+            .includes(searchText.toLowerCase())
+          );
+          track emp.id
+        ) {
+
+          <tr>
+
+            <td class="employee-id">
+              {{ emp.id }}
+            </td>
+
+            <td>
+              {{ emp.name }}
+            </td>
+
+            <td>
+              {{ emp.email }}
+            </td>
+
+            <td>
+              {{ emp.phone }}
+            </td>
+
+            <td>
+
+              <span class="department-badge">
+                {{ emp.department }}
+              </span>
+
+            </td>
+
+            <td>
+
+              <span class="salary-text">
+                ₹ {{ emp.salary }}
+              </span>
+
+            </td>
+
+            <td>
+
+              <span class="course-badge">
+                {{ emp.courseName }}
+              </span>
+
+            </td>
+
+            @if (isAdmin()) {
+
+              <td>
+
+                <div class="action-buttons">
+
+                  <button
+                    class="btn btn-warning btn-sm"
+                    (click)="editEmployee(emp)">
+
+                    Edit
+
+                  </button>
+
+                  <button
+                    class="btn btn-danger btn-sm"
+                    (click)="deleteEmployee(emp.id)">
+
+                    Delete
+
+                  </button>
+
+                </div>
+
+              </td>
+
+            }
+
+          </tr>
+
+        } @empty {
+
+          <tr>
+
+            <td
+              [attr.colspan]="isAdmin() ? 8 : 7"
+              class="empty-data">
+
+              No employees found
+
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
 
 </div>
 
-<!-- Update Employee Form -->
-<div class="card shadow p-4 mt-4"
-     *ngIf="showUpdateForm">
+@if (showUpdateForm && isAdmin()) {
 
-  <h3 class="mb-3">Update Employee</h3>
+  <div class="card update-card shadow p-4 mt-4">
 
-  <form (ngSubmit)="updateEmployee()">
+    <h3 class="mb-3">
+      Update Employee
+    </h3>
 
-    <div class="row">
+    <form (ngSubmit)="updateEmployee()">
 
-      <div class="col-md-6 mb-3">
-        <label class="form-label">Name</label>
-        <input type="text"
-               class="form-control"
-               [(ngModel)]="selectedEmployee.name"
-               name="editName">
+      <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Name
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="selectedEmployee.name"
+            name="editName">
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Email
+          </label>
+
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="selectedEmployee.email"
+            name="editEmail">
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Phone
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="selectedEmployee.phone"
+            name="editPhone">
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Department
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="selectedEmployee.department"
+            name="editDepartment">
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Salary
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="selectedEmployee.salary"
+            name="editSalary">
+
+        </div>
+
       </div>
 
-      <div class="col-md-6 mb-3">
-        <label class="form-label">Email</label>
-        <input type="email"
-               class="form-control"
-               [(ngModel)]="selectedEmployee.email"
-               name="editEmail">
-      </div>
+      <button
+        type="submit"
+        class="btn btn-success me-2">
 
-      <div class="col-md-6 mb-3">
-        <label class="form-label">Phone</label>
-        <input type="text"
-               class="form-control"
-               [(ngModel)]="selectedEmployee.phone"
-               name="editPhone">
-      </div>
+        Update
 
-      <div class="col-md-6 mb-3">
-        <label class="form-label">Department</label>
-        <input type="text"
-               class="form-control"
-               [(ngModel)]="selectedEmployee.department"
-               name="editDepartment">
-      </div>
+      </button>
 
-      <div class="col-md-6 mb-3">
-        <label class="form-label">Salary</label>
-        <input type="text"
-               class="form-control"
-               [(ngModel)]="selectedEmployee.salary"
-               name="editSalary">
-      </div>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancelUpdate()">
 
-    </div>
+        Cancel
 
-    <button type="submit"
-            class="btn btn-success me-2">
-      Update
-    </button>
+      </button>
 
-    <button type="button"
-            class="btn btn-secondary"
-            (click)="cancelUpdate()">
-      Cancel
-    </button>
+    </form>
 
-  </form>
+  </div>
 
-</div>
+}

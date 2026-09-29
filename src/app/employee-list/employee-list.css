@@ -1,0 +1,222 @@
+.employee-card {
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.employee-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.employee-title h3 {
+  margin-bottom: 5px;
+  font-weight: 800;
+}
+
+.employee-title p {
+  margin: 0;
+  color: #64748b;
+}
+
+.employee-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.search-box {
+  min-width: 230px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 18px;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  background: white;
+}
+
+.employee-table thead {
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+}
+
+.employee-table thead th {
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 16px;
+  border: none;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.employee-table tbody tr {
+  transition: 0.3s ease;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.employee-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.employee-table tbody td {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 500;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.employee-id {
+  font-weight: 800;
+  color: #4f46e5;
+}
+
+.department-badge,
+.course-badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.department-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.course-badge {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.salary-text {
+  font-weight: 800;
+  color: #16a34a;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.action-buttons button {
+  min-width: 75px;
+}
+
+.empty-data {
+  padding: 30px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.update-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.update-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, #f59e0b, #22c55e);
+}
+
+@media (max-width: 768px) {
+
+  .employee-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .employee-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .search-box {
+    min-width: 100%;
+  }
+
+  .employee-table thead {
+    display: none;
+  }
+
+  .employee-table,
+  .employee-table tbody,
+  .employee-table tr,
+  .employee-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .employee-table tr {
+    margin-bottom: 18px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  }
+
+  .employee-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    white-space: normal;
+  }
+
+  .employee-table td::before {
+    position: absolute;
+    left: 16px;
+    top: 15px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .employee-table td:nth-child(1)::before {
+    content: "ID";
+  }
+
+  .employee-table td:nth-child(2)::before {
+    content: "Name";
+  }
+
+  .employee-table td:nth-child(3)::before {
+    content: "Email";
+  }
+
+  .employee-table td:nth-child(4)::before {
+    content: "Phone";
+  }
+
+  .employee-table td:nth-child(5)::before {
+    content: "Department";
+  }
+
+  .employee-table td:nth-child(6)::before {
+    content: "Salary";
+  }
+
+  .employee-table td:nth-child(7)::before {
+    content: "Course";
+  }
+
+  .employee-table td:nth-child(8)::before {
+    content: "Action";
+  }
+
+}

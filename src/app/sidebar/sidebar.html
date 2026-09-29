@@ -1,0 +1,56 @@
+<div class="sidebar">
+
+  <!-- Logo -->
+  <div class="sidebar-logo">
+
+    <div class="logo-box">
+      L
+    </div>
+
+    <h3>LMS Portal</h3>
+
+  </div>
+
+  <!-- Menu -->
+  <ul class="sidebar-menu">
+
+    <li routerLink="/dashboard"
+        routerLinkActive="active-menu">
+      <i class="fa fa-home"></i>
+      <span>Dashboard</span>
+    </li>
+
+    <li>
+      <i class="fa fa-users"></i>
+      <span>Employees</span>
+    </li>
+
+    <li>
+      <i class="fa fa-book"></i>
+      <span>Courses</span>
+    </li>
+
+    <li>
+      <i class="fa fa-file"></i>
+      <span>Reports</span>
+    </li>
+
+    <li>
+      <i class="fa fa-certificate"></i>
+      <span>Certificates</span>
+    </li>
+
+  </ul>
+
+  <!-- Logout -->
+  <button
+    class="logout-btn"
+    (click)="logout()">
+
+    <i class="fa fa-sign-out-alt"></i>
+
+    Logout
+
+  </button>
+
+</div>

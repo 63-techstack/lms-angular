@@ -1,0 +1,41 @@
+.add-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.add-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, #4f46e5, #06b6d4, #22c55e);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title::before {
+  content: "+";
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: white;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+}
+
+.save-btn {
+  min-width: 170px;
+}
+
+.message-box {
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: #ecfdf5;
+}

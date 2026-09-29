@@ -1,17 +1,204 @@
-<nav class="navbar navbar-dark bg-dark px-4">
-  <span class="navbar-brand">LMS Dashboard</span>
+<div class="dashboard-layout">
 
-  <button class="btn btn-danger" (click)="logout()">
-    Logout
-  </button>
-</nav>
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
 
-<div class="container mt-4">
+  <!-- Main Content -->
+  <div class="dashboard-content">
 
-  <app-add-employee></app-add-employee>
+    <!-- Header -->
+    <div class="dashboard-header">
 
-  <hr>
+      <div>
 
-  <app-employee-list></app-employee-list>
+        <h2>
+          Welcome Back 👋
+        </h2>
+
+        <p class="text-muted mb-0">
+          Employee Training Management System
+        </p>
+
+      </div>
+
+      <!-- Search -->
+      <div class="dashboard-search">
+
+        <i class="fa fa-search"></i>
+
+        <input
+          type="text"
+          placeholder="Search employees..."
+          [(ngModel)]="searchText">
+
+      </div>
+
+      <!-- Profile -->
+      <div class="profile-box">
+
+        <div class="profile-icon">
+          A
+        </div>
+
+        <div>
+
+          <h6 class="mb-0">
+            Akram
+          </h6>
+
+          <small class="text-muted">
+            {{ role }}
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="dashboard-cards">
+
+      <div class="dashboard-card">
+
+        <div class="card-icon blue">
+          <i class="fa fa-users"></i>
+        </div>
+
+        <h3>
+          {{ totalEmployees }}
+        </h3>
+
+        <p>
+          Total Employees
+        </p>
+
+      </div>
+
+      <div class="dashboard-card">
+
+        <div class="card-icon green">
+          <i class="fa fa-book"></i>
+        </div>
+
+        <h3>
+          {{ totalCourses }}
+        </h3>
+
+        <p>
+          Total Courses
+        </p>
+
+      </div>
+
+      <div class="dashboard-card">
+
+        <div class="card-icon orange">
+          <i class="fa fa-check-circle"></i>
+        </div>
+
+        <h3>
+          {{ completedTrainings }}
+        </h3>
+
+        <p>
+          Completed Trainings
+        </p>
+
+      </div>
+
+      <div class="dashboard-card">
+
+        <div class="card-icon red">
+          <i class="fa fa-clock"></i>
+        </div>
+
+        <h3>
+          {{ pendingTrainings }}
+        </h3>
+
+        <p>
+          Pending Trainings
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-grid">
+
+      <div class="chart-card">
+
+        <div class="chart-header">
+
+          <h3>
+            Training Analytics
+          </h3>
+
+          <p>
+            Completed vs Pending Trainings
+          </p>
+
+        </div>
+
+        <div class="chart-box">
+
+          <canvas
+            baseChart
+            [data]="pieChartData"
+            [type]="pieChartType"
+            [options]="pieChartOptions">
+          </canvas>
+
+        </div>
+
+      </div>
+
+      <div class="chart-card">
+
+        <div class="chart-header">
+
+          <h3>
+            LMS Overview
+          </h3>
+
+          <p>
+            Employees, courses and training summary
+          </p>
+
+        </div>
+
+        <div class="bar-chart-box">
+
+          <canvas
+            baseChart
+            [data]="barChartData"
+            [type]="barChartType"
+            [options]="barChartOptions">
+          </canvas>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Employee Section -->
+    <div class="dashboard-section">
+
+      @if (isAdmin()) {
+
+        <app-add-employee></app-add-employee>
+
+      }
+
+      <app-employee-list
+        [searchText]="searchText">
+      </app-employee-list>
+
+    </div>
+
+  </div>
 
 </div>

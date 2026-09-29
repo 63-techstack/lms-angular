@@ -1,0 +1,99 @@
+.register-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 30px;
+  background: #f1f5f9;
+}
+
+.register-card {
+  width: min(100%, 900px);
+  padding: 36px !important;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.register-logo {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 18px;
+  border-radius: 22px;
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+}
+
+.form-label {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.form-control,
+.form-select {
+  height: 54px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  padding-left: 16px;
+  font-size: 16px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: none;
+  border-color: #4f46e5;
+}
+
+/* Password Box */
+.password-box {
+  position: relative;
+}
+
+/* Input Right Space */
+.password-box .form-control {
+  padding-right: 50px;
+}
+
+/* Eye Icon */
+.eye-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #0f172a;
+  font-size: 18px;
+  z-index: 10;
+}
+
+/* Buttons */
+.register-btn {
+  height: 54px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 18px;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  border: none;
+}
+
+.register-btn:hover {
+  opacity: 0.95;
+}
+
+.back-login-btn {
+  height: 50px;
+  border-radius: 16px;
+  font-weight: 700;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .register-card {
+    padding: 26px !important;
+  }
+
+}

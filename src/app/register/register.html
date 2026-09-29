@@ -1,0 +1,295 @@
+<div class="register-page">
+
+  <div class="card register-card shadow-lg border-0">
+
+    <!-- Logo -->
+    <div class="register-logo">
+      R
+    </div>
+
+    <!-- Heading -->
+    <h2 class="text-center mb-2">
+      Create Account
+    </h2>
+
+    <p class="text-center text-muted mb-4">
+      Register for LMS Portal
+    </p>
+
+    <!-- Form -->
+    <form (ngSubmit)="registerUser()">
+
+      <!-- Names -->
+      <div class="row">
+
+        <!-- First Name -->
+        <div class="col-md-4 mb-3">
+
+          <label class="form-label">
+            First Name
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="firstName"
+            name="firstName"
+            placeholder="First name"
+            required>
+
+        </div>
+
+        <!-- Middle Name -->
+        <div class="col-md-4 mb-3">
+
+          <label class="form-label">
+            Middle Name
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="middleName"
+            name="middleName"
+            placeholder="Optional">
+
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-md-4 mb-3">
+
+          <label class="form-label">
+            Last Name
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="lastName"
+            name="lastName"
+            placeholder="Last name"
+            required>
+
+        </div>
+
+      </div>
+
+      <!-- Email & Phone -->
+      <div class="row">
+
+        <!-- Email -->
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Email
+          </label>
+
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="Enter email"
+            required>
+
+        </div>
+
+        <!-- Phone -->
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Phone Number
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="phone"
+            name="phone"
+            placeholder="Enter phone"
+            required>
+
+        </div>
+
+      </div>
+
+      <!-- Username & Role -->
+      <div class="row">
+
+        <!-- Username -->
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Username
+          </label>
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="username"
+            name="username"
+            placeholder="Create username"
+            required>
+
+        </div>
+
+        <!-- Role -->
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label">
+            Role
+          </label>
+
+          <select
+            class="form-select"
+            [(ngModel)]="role"
+            name="role">
+
+            <option value="USER">
+              USER
+            </option>
+
+            <option value="ADMIN">
+              ADMIN
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <!-- Password Section -->
+      <div class="row">
+
+        <!-- Password -->
+        <div class="col-md-6 mb-4">
+
+          <label class="form-label">
+            Password
+          </label>
+
+          <div class="password-box">
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="Create password"
+              required>
+
+            <!-- Eye Icon -->
+            <span
+              class="eye-icon"
+              (click)="showPassword = !showPassword">
+
+              <i
+                class="fa-solid"
+                [class.fa-eye]="!showPassword"
+                [class.fa-eye-slash]="showPassword">
+              </i>
+
+            </span>
+
+          </div>
+
+          <small class="text-muted">
+            Password must contain uppercase, lowercase,
+            number & special character
+          </small>
+
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="col-md-6 mb-4">
+
+          <label class="form-label">
+            Confirm Password
+          </label>
+
+          <div class="password-box">
+
+            <input
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              class="form-control"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm password"
+              required>
+
+            <!-- Eye Icon -->
+            <span
+              class="eye-icon"
+              (click)="showConfirmPassword = !showConfirmPassword">
+
+              <i
+                class="fa-solid"
+                [class.fa-eye]="!showConfirmPassword"
+                [class.fa-eye-slash]="showConfirmPassword">
+              </i>
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Register Button -->
+      <button
+        type="submit"
+        class="btn btn-primary w-100 register-btn"
+        [disabled]="isLoading">
+
+        @if (isLoading) {
+
+          <span class="spinner-border spinner-border-sm me-2"></span>
+
+          Registering...
+
+        } @else {
+
+          Create Account
+
+        }
+
+      </button>
+
+    </form>
+
+    <!-- Message -->
+    @if (message) {
+
+      <p
+        class="text-center mt-3 mb-0"
+        [class.text-success]="message === 'User Registered Successfully'"
+        [class.text-danger]="message !== 'User Registered Successfully'">
+
+        {{ message }}
+
+      </p>
+
+    }
+
+    <!-- Back Login -->
+    <div class="text-center mt-4">
+
+      <p class="text-muted mb-2">
+        Already have an account?
+      </p>
+
+      <button
+        class="btn btn-outline-primary w-100 back-login-btn"
+        routerLink="/">
+
+        Back to Login
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

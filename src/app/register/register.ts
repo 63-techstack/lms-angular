@@ -27,7 +27,6 @@ export class Register {
   phone = '';
 
   username = '';
-  role = 'USER';
 
   password = '';
   confirmPassword = '';
@@ -36,6 +35,7 @@ export class Register {
   showConfirmPassword = false;
 
   message = '';
+  submitted = false;
 
   // Loader
   isLoading = false;
@@ -47,6 +47,8 @@ export class Register {
 
   registerUser() {
 
+    this.submitted = true;
+
     if (
       !this.firstName.trim() ||
       !this.lastName.trim() ||
@@ -56,9 +58,6 @@ export class Register {
       !this.password.trim() ||
       !this.confirmPassword.trim()
     ) {
-
-      this.message = 'Please fill all required fields';
-
       return;
     }
 
@@ -119,7 +118,7 @@ export class Register {
 
       username: this.username,
 
-      role: this.role,
+      role: 'USER',
 
       password: this.password
     };

@@ -25,6 +25,7 @@ export class Login {
   showPassword = false;
 
   message = '';
+  submitted = false;
 
   constructor(
     private http: HttpClient,
@@ -33,11 +34,12 @@ export class Login {
 
   loginUser() {
 
+    this.submitted = true;
+
     if (
       !this.username.trim() ||
       !this.password.trim()
     ) {
-      this.message = 'Username and password are required';
       return;
     }
 

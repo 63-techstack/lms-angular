@@ -26,7 +26,7 @@
         <div class="col-md-4 mb-3">
 
           <label class="form-label">
-            First Name
+            First Name <span class="required-star">*</span>
           </label>
 
           <input
@@ -35,7 +35,14 @@
             [(ngModel)]="firstName"
             name="firstName"
             placeholder="First name"
+            #firstNameInput="ngModel"
             required>
+
+          @if (firstNameInput.invalid && (firstNameInput.touched || firstNameInput.dirty || submitted)) {
+            <div class="field-error">
+              First name is required.
+            </div>
+          }
 
         </div>
 
@@ -59,7 +66,7 @@
         <div class="col-md-4 mb-3">
 
           <label class="form-label">
-            Last Name
+            Last Name <span class="required-star">*</span>
           </label>
 
           <input
@@ -68,7 +75,14 @@
             [(ngModel)]="lastName"
             name="lastName"
             placeholder="Last name"
+            #lastNameInput="ngModel"
             required>
+
+          @if (lastNameInput.invalid && (lastNameInput.touched || lastNameInput.dirty || submitted)) {
+            <div class="field-error">
+              Last name is required.
+            </div>
+          }
 
         </div>
 
@@ -81,7 +95,7 @@
         <div class="col-md-6 mb-3">
 
           <label class="form-label">
-            Email
+            Email <span class="required-star">*</span>
           </label>
 
           <input
@@ -90,7 +104,21 @@
             [(ngModel)]="email"
             name="email"
             placeholder="Enter email"
+            #emailInput="ngModel"
+            pattern="^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
             required>
+
+          @if (emailInput.errors?.['required'] && (emailInput.touched || emailInput.dirty || submitted)) {
+            <div class="field-error">
+              Email is required.
+            </div>
+          }
+
+          @if (emailInput.errors?.['pattern'] && (emailInput.touched || emailInput.dirty || submitted)) {
+            <div class="field-error">
+              Please enter a valid email address.
+            </div>
+          }
 
         </div>
 
@@ -98,7 +126,7 @@
         <div class="col-md-6 mb-3">
 
           <label class="form-label">
-            Phone Number
+            Phone Number <span class="required-star">*</span>
           </label>
 
           <input
@@ -107,20 +135,33 @@
             [(ngModel)]="phone"
             name="phone"
             placeholder="Enter phone"
+            #phoneInput="ngModel"
+            pattern="^[6-9][0-9]{9}$"
             required>
+
+          @if (phoneInput.errors?.['required'] && (phoneInput.touched || phoneInput.dirty || submitted)) {
+            <div class="field-error">
+              Phone number is required.
+            </div>
+          }
+
+          @if (phoneInput.errors?.['pattern'] && (phoneInput.touched || phoneInput.dirty || submitted)) {
+            <div class="field-error">
+              Please enter a valid 10 digit Indian phone number.
+            </div>
+          }
 
         </div>
 
       </div>
 
-      <!-- Username & Role -->
+      <!-- Username -->
       <div class="row">
 
-        <!-- Username -->
-        <div class="col-md-6 mb-3">
+        <div class="col-md-12 mb-3">
 
           <label class="form-label">
-            Username
+            Username <span class="required-star">*</span>
           </label>
 
           <input
@@ -129,31 +170,14 @@
             [(ngModel)]="username"
             name="username"
             placeholder="Create username"
+            #usernameInput="ngModel"
             required>
 
-        </div>
-
-        <!-- Role -->
-        <div class="col-md-6 mb-3">
-
-          <label class="form-label">
-            Role
-          </label>
-
-          <select
-            class="form-select"
-            [(ngModel)]="role"
-            name="role">
-
-            <option value="USER">
-              USER
-            </option>
-
-            <option value="ADMIN">
-              ADMIN
-            </option>
-
-          </select>
+          @if (usernameInput.invalid && (usernameInput.touched || usernameInput.dirty || submitted)) {
+            <div class="field-error">
+              Username is required.
+            </div>
+          }
 
         </div>
 
@@ -166,7 +190,7 @@
         <div class="col-md-6 mb-4">
 
           <label class="form-label">
-            Password
+            Password <span class="required-star">*</span>
           </label>
 
           <div class="password-box">
@@ -177,6 +201,8 @@
               [(ngModel)]="password"
               name="password"
               placeholder="Create password"
+              #passwordInput="ngModel"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$"
               required>
 
             <!-- Eye Icon -->
@@ -194,7 +220,19 @@
 
           </div>
 
-          <small class="text-muted">
+          @if (passwordInput.errors?.['required'] && (passwordInput.touched || passwordInput.dirty || submitted)) {
+            <div class="field-error">
+              Password is required.
+            </div>
+          }
+
+          @if (passwordInput.errors?.['pattern'] && (passwordInput.touched || passwordInput.dirty || submitted)) {
+            <div class="field-error">
+              Password must contain uppercase, lowercase, number and special character.
+            </div>
+          }
+
+          <small class="text-muted d-block mt-2">
             Password must contain uppercase, lowercase,
             number & special character
           </small>
@@ -205,7 +243,7 @@
         <div class="col-md-6 mb-4">
 
           <label class="form-label">
-            Confirm Password
+            Confirm Password <span class="required-star">*</span>
           </label>
 
           <div class="password-box">
@@ -216,6 +254,7 @@
               [(ngModel)]="confirmPassword"
               name="confirmPassword"
               placeholder="Confirm password"
+              #confirmPasswordInput="ngModel"
               required>
 
             <!-- Eye Icon -->
@@ -232,6 +271,18 @@
             </span>
 
           </div>
+
+          @if (confirmPasswordInput.errors?.['required'] && (confirmPasswordInput.touched || confirmPasswordInput.dirty || submitted)) {
+            <div class="field-error">
+              Confirm password is required.
+            </div>
+          }
+
+          @if (!confirmPasswordInput.errors?.['required'] && confirmPassword !== password && (confirmPasswordInput.touched || confirmPasswordInput.dirty || submitted)) {
+            <div class="field-error">
+              Passwords do not match.
+            </div>
+          }
 
         </div>
 

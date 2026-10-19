@@ -23,7 +23,7 @@
       <div class="mb-3">
 
         <label class="form-label">
-          SHAIK
+          User Name<span class="required-star">*</span>
         </label>
 
         <input
@@ -32,7 +32,14 @@
           name="username"
           class="form-control"
           placeholder="Enter username"
+          #usernameInput="ngModel"
           required>
+
+        @if (usernameInput.invalid && (usernameInput.touched || usernameInput.dirty || submitted)) {
+          <div class="field-error">
+            Username is required.
+          </div>
+        }
 
       </div>
 
@@ -40,7 +47,7 @@
       <div class="mb-2">
 
         <label class="form-label">
-          Password
+          Password <span class="required-star">*</span>
         </label>
 
         <div class="password-box">
@@ -51,6 +58,7 @@
             name="password"
             class="form-control"
             placeholder="Enter password"
+            #passwordInput="ngModel"
             required>
 
           <span
@@ -66,6 +74,12 @@
           </span>
 
         </div>
+
+        @if (passwordInput.invalid && (passwordInput.touched || passwordInput.dirty || submitted)) {
+          <div class="field-error">
+            Password is required.
+          </div>
+        }
 
       </div>
 
